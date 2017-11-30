@@ -98,22 +98,49 @@
                                     <div id="submitform">
                                     	<div class="form-group">
 				                    		<label class="sr-only" for="form-first-name">First name</label>
-				                        	<input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="firstname" pattern="^[A-Z][-a-zA-Z]+$" title="name should be character and First letter Caps" required>
+				                        	<input 
+                                            type="text" 
+                                            name="form-first-name" 
+                                            placeholder="First name..." 
+                                            class="form-first-name form-control" 
+                                            id="firstname"  
+                                            pattern="^[A-Z][-a-zA-Z]+$" 
+                                            title="name should be character and First letter Caps" required>
 				                        </div>
 				                        <div class="form-group">
 				                        	<label class="sr-only" for="form-last-name">Last name</label>
-				                        	<input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="lastname" pattern="^[A-Z][-a-zA-Z]+$" title="name should be character and First letter Caps" required>
+				                        	<input 
+                                            type="text"
+                                             name="form-last-name" 
+                                             placeholder="Last name..." 
+                                             class="form-last-name form-control" 
+                                             id="lastname" 
+                                             pattern="^[A-Z][-a-zA-Z]+$" 
+                                             title="name should be character and First letter Caps" required>
 				                        </div>
                                          <div class="form-group">
                                             <label class="sr-only" for="form-last-name">Password</label>
-                                            <input type="password" name="form-last-name" placeholder="password..." class="form-last-name form-control" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" title="Password must be at least 4 characters, no more than 8 characters, and must include at least one upper case letter, one lower case letter, and one numeric digit." required>
+                                            <input 
+                                            type="password" 
+                                            name="form-last-name"
+                                             placeholder="password..."
+                                              class="form-last-name form-control" 
+                                              id="password" 
+                                              pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" 
+                                              title="Password must be at least 4 characters, no more than 8 characters, and must include at least one upper case letter, one lower case letter, and one numeric digit." required>
                                         </div>
                                            
                                            <div class="form-group">
 				                        	<label class="sr-only" for="form-email">Email</label>
-				                        	<input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="formemail" pattern="" title="" required>
+				                        	<input 
+                                            type="text" 
+                                            name="form-email" 
+                                            placeholder="Email..." 
+                                            class="form-email form-control" 
+                                            id="email" 
+                                            required>
 				                        </div>
-				                        <button type="submit" class="btn" id="submitbtn">Sign me up!</button>
+				                        <input type="submit" class="btn" id="submitbtn" value="Sign me up!">
 				                    <!--</form>-->
                                 </div>
 			                    </div>
@@ -150,7 +177,28 @@
         <script type="text/javascript">
             $(document).ready(function(){
                    $("#submitbtn").click(function(){
-                        alert("clicked");
+                        var firstname=$("#firstname").val();
+                        var lastname=$("#lastname").val();
+                        var email=$("#email").val();
+                        var password=$("#password").val();
+                        var datastring='firstname='+firstname+'&lastname='+lastname+'&email='+email+'&password='+password;
+                        alert();
+                        if(firstname==''|| email==''){
+                            alert('');
+                        }
+                        else{
+                            $.ajax({
+                                type:"GET",
+                                url:"Class/class.php",
+                                data:datastring,
+                                cache:false,//send the file fresh not the cached
+                                success:function(result){
+                                    alert(result);
+                                }
+
+                            });//Ajax closed
+                        }
+
                    });
 
 
