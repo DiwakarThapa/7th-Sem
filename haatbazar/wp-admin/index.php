@@ -53,28 +53,29 @@
 	                        		<div class="form-top-left">
 	                        			<h3>Login to HaatBazzar drashboard</h3>
 	                            		<p>Enter username and password to log on:</p>
-	                        		</div>
+	                        		 <span id="ack"></span>
+                                      
+                                    </div>
 	                        		<div class="form-top-right">
 	                        			<i class="fa fa-key"></i>
 	                        		</div>
 	                            </div>
 	                            <div class="form-bottom">
-				                    <form role="form" action="" method="post" class="login-form">
-				                    	<div class="form-group">
+				                    <div id="submitform1">
+				                        <div class="form-group">
 				                    		<label class="sr-only" for="form-username">Email</label>
-				                        	<input type="text" name="form-username" placeholder="Email..." class="form-username form-control" id="form-username">
+				                        	<input type="text"  placeholder="Email..." class="form-username form-control" id="email">
 				                        </div>
 				                        <div class="form-group">
 				                        	<label class="sr-only" for="form-password">Password</label>
-				                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+				                        	<input type="password" placeholder="Password..." class="form-password form-control" id="password">
 				                        </div>
-				                        <button type="submit" class="btn">Sign in!</button>
-				                    </form>
+				                        <input type="submit" class="btn" value="Sign in!" id="signinbtn">
+                                       
+				                    </div>
+                                    
 			                    </div>
 		                    </div>
-		                
-		                
-	                        
                         </div>
                         
                         <div class="col-sm-1 middle-border"></div>
@@ -182,14 +183,14 @@
                         var email=$("#email").val();
                         var password=$("#password").val();
                         var datastring='firstname='+firstname+'&lastname='+lastname+'&email='+email+'&password='+password;
-                        alert();
+                       /// alert();
                         if(firstname==''|| email==''){
                             alert('');
                         }
                         else{
                             $.ajax({
                                 type:"GET",
-                                url:"Class/class.php",
+                                url:"Class/formreg.php",
                                 data:datastring,
                                 cache:false,//send the file fresh not the cached
                                 success:function(result){
@@ -200,9 +201,36 @@
                         }
 
                    });
+ $("#signinbtn").click(function(){
+                if($("uemail").val()==" " && $("upassword").val()==" "){
+                    alert();
+                        $("#ack").html("<p style='color:red;'>please enter both username and password</p>");
+                    }else{
+                    var email=$("#email").val();
+                    var password=$("#password").val();
+                    var datast="email="+email+"&pw="+password;
+                    $.ajax({
+                        type:"POST",
+                        url:"Class/adminlogin.php",
+                        data:datast,
+                        cache:false,
+                        success:function(result){
+                            if(result==1){
+                                
+                                window.location.href="http://localhost/7th-sem/haatbazar/wp-admin/"+"blank.php";
+                            }else{
+                                alert("no correct passowrd or email");
+                            }
+                        }
+                    });
+                   
+                    }
+                    });
 
-
-            });
+            
+         
+    });
+           
 
         </script>
         
