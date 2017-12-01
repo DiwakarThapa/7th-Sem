@@ -12,6 +12,23 @@ function PdoDbConnection(){
 			die("Something go wrong with connection!!!");
 //$e->getMessage();
 }}
+function showproduct(){
+try{
+
+	$this->PdoDbConnection();
+	$sql="SELECT * FROM tbl_product";
+     $query=$this->handler->prepare($sql);
+    	$query->execute();
+    	return $query;
+    	
+    	//return $row;
+   }catch(PDOException $e){
+   	echo $e->getMessage();
+   } 
+    	
+
+
+}
 
 function verifyLogin($email,$password){
 try{
@@ -36,7 +53,20 @@ echo $e->getMessage();
 
 }
 
+function insertproduct($productname,$price,$cprice,$details,$category,$filename){
+try{
+	$this->PdoDbConnection(); 
+$sql="INSERT INTO tbl_product(productname,price,cprice,details,category,filename) VALUES(?,?,?,?,?,?)";
+$st=$this->handler->prepare($sql);
+$givedata=array($productname,$price,$cprice,$details,$category,$filename);
+$st->execute($givedata);
+echo "<script>window.location.href='http://localhost/7th-sem/haatbazar/wp-admin/addproduct.php'</script>";
+}catch(PDOException $e){
+	echo $e->getMessage();
 
+}
+
+}
 
 
 

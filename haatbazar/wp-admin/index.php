@@ -126,7 +126,7 @@
                                             name="form-last-name"
                                              placeholder="password..."
                                               class="form-last-name form-control" 
-                                              id="password" 
+                                              id="password1" 
                                               pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" 
                                               title="Password must be at least 4 characters, no more than 8 characters, and must include at least one upper case letter, one lower case letter, and one numeric digit." required>
                                         </div>
@@ -138,7 +138,7 @@
                                             name="form-email" 
                                             placeholder="Email..." 
                                             class="form-email form-control" 
-                                            id="email" 
+                                            id="email1" 
                                             required>
 				                        </div>
 				                        <input type="submit" class="btn" id="submitbtn" value="Sign me up!">
@@ -180,12 +180,12 @@
                    $("#submitbtn").click(function(){
                         var firstname=$("#firstname").val();
                         var lastname=$("#lastname").val();
-                        var email=$("#email").val();
-                        var password=$("#password").val();
+                        var email=$("#email1").val();
+                        var password=$("#password1").val();
                         var datastring='firstname='+firstname+'&lastname='+lastname+'&email='+email+'&password='+password;
                        /// alert();
                         if(firstname==''|| email==''){
-                            alert('');
+                            alert('not valid');
                         }
                         else{
                             $.ajax({
