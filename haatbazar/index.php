@@ -528,12 +528,18 @@ require_once('wp-admin/Class/class.php');
                                                 </div>
                                             </div>
                                             <div class="caption">
-                                                <h6 class="regular"><a href="shop-single-product-v1.html"><?php echo $v['productname'];?></a></h6>
+                                                <h6 class="regular"><a href="#"><?php echo $v['productname'];?></a></h6>
+                                               <form method="post" action="cart.php?action=add&id=<?php echo $v['pid'];  ?>">  
+                      
                                                 <div class="price">
                                                     <small class="amount off"><?php echo $v['price'];?></small>
                                                     <span class="amount text-primary"><?php echo $v['cprice'];?></span>
-                                                </div>
-                                                <a href="cart.php?id=<?php echo $v['pid'];?>"><i class="fa fa-cart-plus mr-5"></i>Add to cart</a>
+                                                    <input type="text" name="hidden_name" value="<?php echo $v['productname'];?>" />  
+                               <input type="text" name="hidden_price" value="<?php echo $v["price"];?>" />  
+                           </div>  <h6 class="regular">Quantity</h6>
+                                                 <input type="text" name="quantity" class="form-control" value="1" />   
+                                                 <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" /> 
+                                            </form>
                                             </div><!-- end caption -->
                                         </div><!-- end thumbnail -->
                                     </div><!-- end col -->
@@ -721,7 +727,7 @@ require_once('wp-admin/Class/class.php');
         <script type="text/javascript" src="js/gmaps.js"></script>
         <script type="text/javascript" src="js/swiper.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-        
+     
     </body>
 
 

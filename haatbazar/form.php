@@ -1,38 +1,5 @@
-<?php 
-session_start();
-if(isset($_POST['add_to_cart'])){
-	if (isset($_SESSION['shopcart'])) {
-		$item_array_id=array_column($_SESSION['shopcart'],"iditem");
-		if(!in_array($_GET['id'],$item_array_id)){
-			$count=count($_SESSION['shopcart']);
-			
-			$itemlist=array('iditem'=>$_GET['id'],'itemname'=>$_POST['hidden_name'],'itemprice'=>$_POST['hidden_price'],'itemquantity'=>$_POST['quantity']);
-	
-			$_SESSION['shopcart'][$count]=$itemlist;
-						
-	
-
-		}else{
-			echo "<script>alert('inserted early')</script>";
-		}
-
-	} else {
-		$itemlist=array('iditem'=>$_GET['id'],'itemname'=>$_POST['hidden_name'],'itemprice'=>$_POST['hidden_price'],'itemquantity'=>$_POST['quantity']);
-		$_SESSION['shopcart'][0]=$itemlist;
-		}
-		
-}
-if(isset($_GET['action'])){
-	if($_GET['action']=="delete"){
-		foreach ($_SESSION['shopcart'] as $key => $value) {
-			if($value["iditem"]==$_GET["id"]){
-				unset($_SESSION["shopcart"][$key]);
-				echo "<script>window.location='http://localhost/7th-sem/haatbazar/cart.php'</script>";
-
-			}
-		}
-	}
-}
+<?php
+require_once('wp-admin/Class/class.php'); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -148,7 +115,7 @@ if(isset($_GET['action'])){
                 <div id="navbar-collapse-3" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <!-- Home -->
-                        <li ><a href="index.php"  >Home</a>
+                        <li><a href="index.php"  >Home</a>
                             
                         </li><!-- end li dropdown -->    
                         <!-- Features -->
@@ -165,63 +132,58 @@ if(isset($_GET['action'])){
         
         
         
-        
- 
-        <div class="col-sm-12 text-center">
-        <div class="table-responsive cart_info">
-                <table class="table table-condensed">
-                    <thead>
-                        <tr class="cart_menu">
-           <td class="image"><strong>ITEM</strong></td>
-           <td class="description"><strong>DETAILS</strong></td>
-            <td class="description"><strong>Quantity</strong></td>
-           <td class="total"><strong>PRICE</strong></td>
-           <td class="total"><strong>TOTAL</strong></td>
-          <td class="total"><strong>Cart Remove</strong></td>
-            
-           <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>    
-                    	<?php 
-                    	if(!empty($_SESSION['shopcart'])){
-                    		$total=0;
-                    	
-                    		foreach ($_SESSION['shopcart'] as $key => $value) {
-                    	                    	
-                    	?>
-                    <tr>
-                    	<td><?php echo $value['iditem'];?></td>
-                    	<td><?php echo $value['itemname'];?></td>
-                    	<td><?php echo $value['itemquantity'];?></td>
-                    	<td><?php echo $value['itemprice'];?></td>
-                    	<td>Rs.<?php echo $value['itemprice']*$value['itemquantity'];?></td>
-                    	<td><?php $total=$total+$value['itemprice']*$value['itemquantity'];?></td>
-                    	<td><a href="cart.php?action=delete&id=<?php echo $value['iditem'];?>"><button type="button" class="close" aria-label="Close">
-  							<span aria-hidden="true">&times;</span>
-							</button></a></td>
-                    </tr>
 
-                    <?php }
+
+    <section id="cart_items">
+        <div class="container">
+       
+            <div class="shopper-informations">
+                <div class="row">
+              
+                  <div class="col-sm-8 col-sm-offset-2">
+                <div class="bill-to">
+                            <p><h4>Information Form</h4></p><br>
+        <div class="form-one">
+        <form action="form.php" method="post" name="form1">
+                <input type="text" name="name" class="form-control input-lg" placeholder="Full Name *" required>
+                <input type="text" name="email" class="form-control input-lg" placeholder="Email*" required>
+                <input type="text" name="address" class="form-control input-lg" placeholder="Address *" required>                               
+                <input type="text" name="contactno" class="form-control input-lg" placeholder="Contact # *" required>  
+                  <input type="text" name="House no." class="form-control input-lg" placeholder="House No. *">
+                  <br>
+              <select name="Place">
+                
+                    <option>-- Place --</option>
+                    <option value="pakistan">Kathmandu</option>
+                    <option value="uk">Bhaktapur</option>
+                    <option value="uae">Lalitpur</option>
+                    <option value="sudia">Other</option>
+                </select>
+
+                <br>
+        </div>
+                <div class="form-two">
+                            <p><h4>Products Details</h4></p> <br>
+                            <input type="number" class="form-control input-lg" name="quantity" min="1" max="100">
+                            
+                            <p><h5>Shipping Order Detail</h5></p><br>
+                            <textarea name="details" class="form-control input-lg" placeholder="Notes about your order 'Out of Country', Special Notes for Delivery." rows="4"></textarea>
+                </div><br> <br>
+                <a class="btn btn-primary" href="cart.php?cmd=emptycart">Cancel</a>
+                    <button type="submit" name="submit" class="btn btn-primary" >Confirm Order</button>
+                        </div>
+                    </div>
+                        
                     
-                    echo "<tr>
-                    	<td colspan='3'>"."Total Price"."</td>"."<td>Rs.".$total."</td>
-                    	
-                    </tr>";
-                                    	}?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-            <br><br><br><br><br><br><br><br>
-    <section id="do_action">
-                <div class="container" align="center">
-                <a class="btn btn-default check_out " style="font-size:20px; padding:10px" href="index.php">Continue Shopping</a>   
-            <a class="btn btn-default check_out " style="font-size:20px; padding:10px"  href="form.php">Continue to Payment</a>
-            <a class="btn btn-default check_out " style="font-size:20px; padding:10px"  href="cart.php?cmd=emptycart">Cancel Shopping</a>           
-        </div>
-    </section><!--/#do_action-->
-        <br><br><br>
+                                                                           
+                    
+                    </form>
+</div>               
+</div></div>
+</div></div>
+</section> <!--/#cart_items--><br>
+
+
         <!-- start footer -->
         <footer class="footer">
             <div class="container">
