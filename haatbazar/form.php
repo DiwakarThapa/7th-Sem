@@ -1,5 +1,9 @@
 <?php
 require_once('wp-admin/Class/class.php'); 
+if(empty($_SESSION['shopcart'])){
+echo "<script>window.location.href='http://localhost/7th-sem/haatbazar'</script>";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,16 +49,7 @@ require_once('wp-admin/Class/class.php');
                 <ul class="topBarNav pull-right">
                     
                 
-                    <li class="linkdown">
-                        <a href="javascript:void(0);">
-                            <i class="fa fa-shopping-basket mr-5"></i>
-                            <span class="hidden-xs">
-                                Cart
-                                
-                            </span>    
-                        </a>
-                     
-                    </li>
+                  <?php require_once("cart/cartsession.php");?>
                 </ul>
             </div><!-- end container -->
         </div>
@@ -144,27 +139,24 @@ require_once('wp-admin/Class/class.php');
                 <div class="bill-to">
                             <p><h4>Information Form</h4></p><br>
         <div class="form-one">
-        <form action="form.php" method="post" name="form1">
+        <form action="placeorder.php" method="post" name="form1">
                 <input type="text" name="name" class="form-control input-lg" placeholder="Full Name *" required>
                 <input type="text" name="email" class="form-control input-lg" placeholder="Email*" required>
                 <input type="text" name="address" class="form-control input-lg" placeholder="Address *" required>                               
                 <input type="text" name="contactno" class="form-control input-lg" placeholder="Contact # *" required>  
-                  <input type="text" name="House no." class="form-control input-lg" placeholder="House No. *">
                   <br>
-              <select name="Place">
+              <select name="place">
                 
                     <option>-- Place --</option>
-                    <option value="pakistan">Kathmandu</option>
-                    <option value="uk">Bhaktapur</option>
-                    <option value="uae">Lalitpur</option>
-                    <option value="sudia">Other</option>
+                    <option value="kathmandu">Kathmandu</option>
+                    <option value="Bhaktapur">Bhaktapur</option>
+                    <option value="lalitpur">Lalitpur</option>
+                  
                 </select>
 
                 <br>
         </div>
-                <div class="form-two">
-                            <p><h4>Products Details</h4></p> <br>
-                            <input type="number" class="form-control input-lg" name="quantity" min="1" max="100">
+              
                             
                             <p><h5>Shipping Order Detail</h5></p><br>
                             <textarea name="details" class="form-control input-lg" placeholder="Notes about your order 'Out of Country', Special Notes for Delivery." rows="4"></textarea>

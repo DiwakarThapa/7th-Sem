@@ -45,16 +45,7 @@ require_once('wp-admin/Class/class.php');
                 <ul class="topBarNav pull-right">
                     
                 
-                    <li class="linkdown">
-                        <a href="javascript:void(0);">
-                            <i class="fa fa-shopping-basket mr-5"></i>
-                            <span class="hidden-xs">
-                                Cart
-                                
-                            </span>    
-                        </a>
-                     
-                    </li>
+                   <?php require_once("cart/cartsession.php");?>
                 </ul>
             </div><!-- end container -->
         </div>

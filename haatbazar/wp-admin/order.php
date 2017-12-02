@@ -11,7 +11,7 @@ include('include/navbar.php');
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Show-Products</h1>
+                    <h1 class="page-header">Orders</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -31,31 +31,49 @@ include('include/navbar.php');
                             <thead>
                             <tr>
                                 <th>S.No.</th>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Prices</th>
-                                <th>Thumbnails</th>
-                                <th>Action</th>
+                                <th>Customer Name</th>
+                                <th>Customer Contact Number</th>
+                                <th>Customer Address</th>
+                                <th>Email</th>
+                                <th>Customer Place</th>
+                                 <th>Product Name</th>
+                                  <th>Product Quantity</th>
+                                   <th>Product Price</th>
+                                   <th>Total</th>
                             </tr>
                             </thead>
                             <tbody>
                                 <?php 
                                 $db=new PdoConnection();
                                 
-                                $row=$db->showproduct();
+                                $row=$db->showorderproduct();
                                 $i=1;
+                                $total=0;
                                 foreach ($row as $val) {
                                     
                                 ?>
                                                                                     <tr>
                                 <td><?php echo $i?></td>
+                                <td><?php echo $val['cname'];?></td>
+                                <td><?php echo $val['ccantact'];?></td>
+                                <td><?php echo $val['caddress'];?></td>
+                                <td><?php echo $val['cemail'];?></td>
+                                <td><?php echo $val['cplace'];?></td>
                                 <td><?php echo $val['productname'];?></td>
-                                <td><?php echo $val['category'];?></td>
-                                <td><?php echo $val['price'];?></td>
-                                <td><img src="wp-admin/images/<?php echo $v['category'];?>/<?php echo $v['filename'];?>" width="50" height="50"></td>
-                                <td><a href="delete.php?id=<?php echo $val['pid'];?>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                                <td><?php echo $val['productquantity'];?></td>
+                                <td><?php echo $val['productprice'];?></td>
+                                <td>Rs.<?php echo $val['productprice']*$val['productquantity'];?></td>
+                                
+                                                            
+                                                            </tr>
+
+                            <?php $i++;$total=$total+($val['productprice']*$val['productquantity']);}
+
+                            ?>
+                            <tr>
+                                <td colspan="8">Total Price</td>
+                                <td>Rs.<?php echo $total;?></td>
                             </tr>
-                            <?php $i++;}?>
                             </tbody>
                                                
                             

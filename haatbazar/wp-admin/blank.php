@@ -1,8 +1,8 @@
 <?php
-session_start();
-if(!isset($_SESSION['session'])){
-header('location:'."http://localhost/7th-sem/haatbazar/wp-admin/");
-}
+
+/*if(!isset($_SESSION['session'])){
+header('location:http://localhost/7th-sem/haatbazar/wp-admin/blank.php');
+}*/
 include('include/header.php');
 
 include('include/navbar.php');

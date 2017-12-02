@@ -1,5 +1,4 @@
 <?php
-session_start();
 class PdoConnection{
 private $session;
 public $handler;
@@ -12,6 +11,39 @@ function PdoDbConnection(){
 			die("Something go wrong with connection!!!");
 //$e->getMessage();
 }}
+
+function showorderproduct(){
+    try{
+
+    $this->PdoDbConnection();
+    $sql="SELECT * FROM tbl_order";
+     $query=$this->handler->prepare($sql);
+        $query->execute();
+        return $query;
+        
+        //return $row;
+   }catch(PDOException $e){
+    echo $e->getMessage();
+   } 
+        
+}
+
+
+
+function delete($i){
+try{
+
+	$this->PdoDbConnection();
+	$sql="delete  FROM tbl_product where pid=?";
+     $query=$this->handler->prepare($sql);
+    	$query->execute(array($i));
+    	return 1;
+    	//return $row;
+   }catch(PDOException $e){
+   	echo $e->getMessage();
+   } 
+    	
+}
 function showproduct(){
 try{
 
@@ -26,12 +58,11 @@ try{
    	echo $e->getMessage();
    } 
     	
-
-
 }
 
 function verifyLogin($email,$password){
 try{
+	session_start();
 
 	$sql="SELECT * FROM tbl_user where email=? and password=?";
     $query=$this->handler->prepare($sql);
@@ -68,6 +99,20 @@ echo "<script>window.location.href='http://localhost/7th-sem/haatbazar/wp-admin/
 
 }
 
+function insertOrder($cname,$ccontact,$caddress,$cemail,$cplace,$productname,$productquantity,$productprice,$details){
+	try{
+	$this->PdoDbConnection(); 
+$sql="INSERT INTO tbl_order(cname,ccontact,caddress,cemail,cplace,productname,productquantity,productprice,details) VALUES(?,?,?,?,?,?,?,?,?)";
+$st=$this->handler->prepare($sql);
+$givedata=array($cname,$ccontact,$caddress,$cemail,$cplace,$productname,$productquantity,$productprice,$details);
+$st->execute($givedata);
+return 1;
+}catch(PDOException $e){
+	echo $e->getMessage();
+
+}
+
+}
 
 
 function insert($df){

@@ -1,3 +1,8 @@
+<?php 
+if(isset($_SESSION['session'])){
+echo "<script>window.locatiob.href=http://localhost/7th-sem/haatbazar/wp-admin/blank.php</script>";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
