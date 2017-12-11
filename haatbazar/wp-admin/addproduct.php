@@ -1,8 +1,10 @@
 <?php
-
+session_start();
+require_once('Class/class.php');
 include('include/header.php');
 
 include('include/navbar.php');
+
 ?>
 
         
@@ -31,14 +33,15 @@ include('include/navbar.php');
 <select name="category">
     <option value="cloths">Clothes</option>
     <option value="bags">Bags</option>
-    <option value="shoes">Shoes</option>
+    
     <option value="household">Household</option>
     <option value="technology">Technology</option>
 </select>
 
 <p>Description</p>
 
-<textarea class="thumbnail form-control" name="details" id="details" style="width:100%; height:100px" placeholder="write here..." required></textarea>
+<textarea class="thumbnail form-control" name="editor" id="details" style="width:100%; height:100px" placeholder="write here..." required></textarea>
+
 <p>Add Image</p>
 <div style="background-color:#CCC">
 <input type="file" style="width:100%" name="picture" class="btn thumbnail" id="picture" >
@@ -75,6 +78,9 @@ include('include/navbar.php');
    
         </div>
     <!-- /#wrapper -->
+    <script >
+    CKEDITOR.replace('editor');
+</script>
 
 <?php
 

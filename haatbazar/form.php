@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('wp-admin/Class/class.php'); 
 if(empty($_SESSION['shopcart'])){
 echo "<script>window.location.href='http://localhost/7th-sem/haatbazar'</script>";

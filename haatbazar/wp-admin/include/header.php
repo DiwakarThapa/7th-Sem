@@ -7,7 +7,10 @@
         <meta name="author" content="">
 
         <title>HaatBazar Drashboard</title>
-
+            <!--CKEDITOR full...........
+        <script src="//cdn.ckeditor.com/4.7.3/full/ckeditor.js"></script>-->
+        <!--CKEDITOR half-->
+        <script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
 

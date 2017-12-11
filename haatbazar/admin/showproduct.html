@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Bootstrap Admin Template">
+    <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
+    <title>Admin Panel</title>
+    <!-- Vendor styles-->
+    <link rel="stylesheet" href="css/vendor.css">
+    <!-- App styles-->
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body class="theme-1">
+    <div class="layout-container">
+      <!-- top navbar-->
+      <header class="header-container">
+        <nav>
+          <ul class="d-lg-none">
+            <li><a class="menu-link menu-link-slide" id="sidebar-toggler" href="#"><span><em></em></span></a></li>
+          </ul>
+          <ul class="d-none d-sm-block">
+            <li><a class="menu-link menu-link-slide" id="offcanvas-toggler" href="#"><span><em></em></span></a></li>
+          </ul>
+          <h2 class="header-title">Produts</h2>
+          <ul class="float-right">
+            <li><a class="ripple" id="header-search" href="#"><em class="ion-ios-search-strong"></em></a></li>
+            <li class="dropdown"><a class="dropdown-toggle has-badge ripple" href="#" data-toggle="dropdown"><em class="ion-person"></em><sup class="badge bg-danger">3</sup></a>
+              <ul class="dropdown-menu dropdown-menu-right md-dropdown-menu">
+                <li><a href="profile.html"><em class="ion-home icon-fw"></em>Profile</a></li>
+                <li><a href="messages.html"><em class="ion-gear-a icon-fw"></em>Messages</a></li>
+                <li class="dropdown-divider" role="presentation"></li>
+                <li><a href="user.login.html"><em class="ion-log-out icon-fw"></em>Logout</a></li>
+              </ul>
+            </li>
+            <li><a class="ripple" id="header-settings" href="#"><em class="ion-gear-b"></em></a></li>
+          </ul>
+        </nav>
+      </header>
+      <!-- sidebar-->
+      <aside class="sidebar-container">
+        <div class="sidebar-header">
+          <div class="float-right pt-lg text-muted invisible"><em class="ion-close-round"></em></div><a class="sidebar-header-logo" href="#"><img src="images/logo.png" data-svg-replace="images/logo.svg" alt="Logo"><span class="sidebar-header-logo-text">Admin</span></a>
+        </div>
+        <div class="sidebar-content">
+          <div class="sidebar-toolbar text-center"><a href="#"><img class="rounded-circle thumb64" src="images/01.jpg" alt="Profile"></a>
+            <div class="mt">Welcome, Diwakar</div>
+          </div>
+          <nav class="sidebar-nav">
+            <ul>
+              <li><a class="ripple" href="dashboard.html"><span class="float-right nav-label"><span class="badge bg-success">2</span></span><span class="nav-icon"><img class="invisible" data-svg-replace="images/aperture.svg" alt="MenuItem"></span><span>Dashboard</span></a></li>
+              <li><a class="ripple" href="addproduct.html"><span class="float-right nav-label"></span><span class="nav-icon"><img class="invisible" data-svg-replace="images/radio-waves.svg" alt="MenuItem"></span><span>Add Products</span></a></li>
+              <li><a class="ripple" href="showproduct.html"><span class="float-right nav-label"></span><span class="nav-icon"><img class="invisible" data-svg-replace="images/radio-waves.svg" alt="MenuItem"></span><span>Show Products</span></a></li>
+              <li><a class="ripple" href="orders.html"><span class="float-right nav-label"></span><span class="nav-icon"><img class="invisible" data-svg-replace="images/radio-waves.svg" alt="MenuItem"></span><span>Orders</span></a></li>      
+             
+            
+            </ul>
+          </nav>
+        </div>
+      </aside>
+      <div class="sidebar-layout-obfuscator"></div>
+      <!-- Main section-->
+      <main class="main-container">
+        <!-- Page content-->
+        <section>
+          <div class="container-fluid">
+            <!-- DATATABLE DEMO 1-->
+            <div class="cardbox">
+              <div class="cardbox-heading">Products List</div>
+              <div class="cardbox-body">
+                <div class="table-responsive">
+                  <table class="table-datatable table table-striped table-hover mv-lg" id="datatable1">
+                    <thead>
+                      <tr>
+                        <th>S No.</th>
+                        <th>Name</th>
+                        <th>Catrgory</th>
+                        <th class="sort-numeric">Price</th>
+                        <th class="sort-alpha">Thumbnail</th>
+                        <th>Action</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="gradeX">
+                      <td><?php echo $i?></td>
+                                <td><?php echo $val['productname'];?></td>
+                                <td><?php echo $val['category'];?></td>
+                                <td><?php echo $val['price'];?></td>
+                                <td><img src="wp-admin/images/<?php echo $v['category'];?>/<?php echo $v['filename'];?>" width="50" height="50"></td>
+                                <td><a href="delete.php?id=<?php echo $val['pid'];?>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          
+           
+          </div>
+        </section>
+        <!-- Page footer-->
+        <footer><span>2017 Admin Panel</span></footer>
+      </main>
+    </div>
+   
+   
+    <!-- Google Maps API-->
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBNs42Rt_CyxAqdbIBK0a5Ut83QiauESPA"></script>
+    <!-- Vendor script-->
+    <script src="js/vendor.js"></script>
+    <!-- App script-->
+    <script src="js/app.js"></script>
+  </body>
+
+
+</html>

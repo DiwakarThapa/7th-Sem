@@ -1,8 +1,8 @@
 <?php
 require_once('class.php');
-if(!isset($_SESSION['session'])){
+/*if(!isset($_SESSION['session'])){
 header('location:'."http://localhost/7th-sem/haatbazar/wp-admin/");
-}
+}*/
 if(isset($_FILES['picture'])){
 $productname=$_POST['productname'];
 $price=$_POST['price'];
@@ -59,7 +59,8 @@ $objproduct=new PdoConnection();
 $objproduct->insertproduct($productname,$price,$cprice,$details,$category,$filename);
 }else{
 	//direst
-	echo "<script>window.location.href='http://localhost/7th-sem/haatbazar/wp-admin/addproduct.php'</script>";
+header('location:'."http://localhost/7th-sem/haatbazar/wp-admin/addproduct.php");
+
 }
 
 ?>

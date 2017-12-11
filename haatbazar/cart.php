@@ -1,6 +1,8 @@
 <?php 
 session_start();
+
 if(isset($_POST['add_to_cart'])){
+    $GLOBALS['id']=$_GET['id'];
 	if (isset($_SESSION['shopcart'])) {
 		$item_array_id=array_column($_SESSION['shopcart'],"iditem");
 		if(!in_array($_GET['id'],$item_array_id)){
@@ -22,17 +24,17 @@ if(isset($_POST['add_to_cart'])){
 		}
 		
 }
-if(isset($_GET['action'])){
+/*if(isset($_GET['action'])){
 	if($_GET['action']=="delete"){
 		foreach ($_SESSION['shopcart'] as $key => $value) {
-			if($value["iditem"]==$_GET["id"]){
+			if($value["iditem"]==$GLOBALS['id']){
 				unset($_SESSION["shopcart"][$key]);
-				echo "<script>window.location='http://localhost/7th-sem/haatbazar/cart.php'</script>";
+				echo "<script>window.location='http://localhost/7th-sem/haatbazar/index.php'</script>";
 
 			}
 		}
 	}
-}
+}*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +90,7 @@ if(isset($_GET['action'])){
             <div class="container">
                 <div class="row display-table">
                     <div class="col-sm-3 vertical-align text-left hidden-xs">
-                        <a href="javascript:void(0);">
+                        <a href="index.php">
                             <img width="160" src="img/logo-big.png" alt="" />
                         </a>
                     </div><!-- end col -->
@@ -196,7 +198,7 @@ if(isset($_GET['action'])){
                     <?php }
                     
                     echo "<tr>
-                    	<td colspan='3'>"."Total Price"."</td>"."<td>Rs.".$total."</td>
+                    	<td colspan='6'>"."Total Price"."</td>"."<td>Rs.".$total."</td>
                     	
                     </tr>";
                                     	}?>
@@ -209,7 +211,7 @@ if(isset($_GET['action'])){
                 <div class="container" align="center">
                 <a class="btn btn-default check_out " style="font-size:20px; padding:10px" href="index.php">Continue Shopping</a>   
             <a class="btn btn-default check_out " style="font-size:20px; padding:10px"  href="form.php">Continue to Payment</a>
-            <a class="btn btn-default check_out " style="font-size:20px; padding:10px"  href="cart.php?cmd=emptycart">Cancel Shopping</a>           
+          <!---  <a class="btn btn-default check_out " style="font-size:20px; padding:10px"  href="cart.php?action=delete">Cancel Shopping</a> -->          
         </div>
     </section><!--/#do_action-->
         <br><br><br>

@@ -3,7 +3,7 @@
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="black.php">Haatbazar</a>
+                    <a class="navbar-brand">Haatbazar</a>
                 </div>
 
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -55,7 +55,7 @@
                         <ul class="nav" id="side-menu">
                             
                             <li>
-                                <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <a href="http://localhost/7th-sem/haatbazar/wp-admin/blank.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Products<span class="fa arrow"></span></a>
@@ -70,7 +70,8 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="order.php"><i class="fa fa-table fa-fw"></i> Orders</a>
+                                <a href="order.php"><i class="fa fa-table fa-fw"></i> Orders <span style="color: red;">(<?php    $db=new PdoConnection();
+                                    echo $db->getordernumber();?>)</span></a>
                             </li>
                           
                            

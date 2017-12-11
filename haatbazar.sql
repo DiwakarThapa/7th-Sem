@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2017 at 01:35 AM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.9
+-- Generation Time: Dec 10, 2017 at 02:12 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -46,7 +46,11 @@ CREATE TABLE `tbl_order` (
 --
 
 INSERT INTO `tbl_order` (`oid`, `cname`, `ccontact`, `caddress`, `cemail`, `cplace`, `productname`, `productquantity`, `productprice`, `details`) VALUES
-(1, 'diwakar thapa', '9808880249', 'hattigauda', 'diwakar.thapa@hotmail.com', 'pakistan', 'm', 1, 9, 'ddflkjlksj');
+(1, 'diwakar thapa', '9808880249', 'hattigauda', 'diwakar.thapa@hotmail.com', 'pakistan', 'm', 1, 9, 'ddflkjlksj'),
+(2, 'diwakar', '9808880249', 'ktm', 'diwakar.thapa@hotmail.com', 'kathmandu', 'Shirt', 1, 5000, 'dfgfdgdf'),
+(3, 'diwakar', '9808880249', 'ktm', 'diwakar.thapa@hotmail.com', 'kathmandu', 'bag', 1, 600, 'dfgfdgdf'),
+(4, 'asdasdasddsad', '9808880249', 'ktm', 'dbsdbsdsa@tahued.com', 'kathmandu', 'Shirt', 1, 5000, 'dssdfdsfsdfsd'),
+(5, 'diwakar Thapa', '980880249', 'thankot', 'diwakar.thapa@hotmail.com', 'kathmandu', 'Shirt', 1, 5000, 'mfgfg');
 
 -- --------------------------------------------------------
 
@@ -69,10 +73,10 @@ CREATE TABLE `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`pid`, `productname`, `price`, `cprice`, `details`, `category`, `filename`) VALUES
-(1, 'm', '9', '9', 'm', 'cloths', '23432573_653773061677267_807090906_o.jpg'),
-(2, 'ram', '99', '99999', 'dsfslfkdsf', 'bags', '23336497_653772945010612_1430485713_o.jpg'),
-(3, 'diwakar', '999', '99', 'fsdfdsfdsf', 'technology', '23432573_653773061677267_807090906_o.jpg'),
-(4, 'diwaa', '22222', '22222', 'dffsfsdfsdfdsfds', 'technology', '23336497_653772945010612_1430485713_o.jpg');
+(5, 'Shirt', '5000', '6000', 'Good quality shirt in cheap price.', 'cloths', 'men_02.jpg'),
+(6, 'bag', '600', '700', 'this is bag', 'bags', 'bags_03.jpg'),
+(8, 'phone', '700', '900', 'Samsumg phone', 'technology', 'technology_03.jpg'),
+(10, 'Laptop', '600', '900', 'This is description', 'technology', 'technology_04.jpg');
 
 -- --------------------------------------------------------
 
@@ -128,13 +132,13 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `oid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `oid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `pid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `pid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('wp-admin/Class/class.php');
 
 if(isset($_POST['submit'])){

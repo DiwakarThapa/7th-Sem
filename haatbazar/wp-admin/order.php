@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('Class/class.php');
 include('include/header.php');
 
@@ -55,7 +56,7 @@ include('include/navbar.php');
                                                                                     <tr>
                                 <td><?php echo $i?></td>
                                 <td><?php echo $val['cname'];?></td>
-                                <td><?php echo $val['ccantact'];?></td>
+                                <td><?php echo $val['ccontact'];?></td>
                                 <td><?php echo $val['caddress'];?></td>
                                 <td><?php echo $val['cemail'];?></td>
                                 <td><?php echo $val['cplace'];?></td>
@@ -71,7 +72,7 @@ include('include/navbar.php');
 
                             ?>
                             <tr>
-                                <td colspan="8">Total Price</td>
+                                <td colspan="9">Total Price</td>
                                 <td>Rs.<?php echo $total;?></td>
                             </tr>
                             </tbody>

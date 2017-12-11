@@ -1,4 +1,5 @@
 <?php
+//session_start();
 class PdoConnection{
 private $session;
 public $handler;
@@ -11,6 +12,25 @@ function PdoDbConnection(){
 			die("Something go wrong with connection!!!");
 //$e->getMessage();
 }}
+
+
+function getordernumber(){
+    try{
+        $this->PdoDbConnection();
+        $sql="select * from tbl_order";
+        $query=$this->handler->prepare($sql);
+        $orderlist=0;
+        $query->execute();
+        while ($row=$query->fetch()) {
+        $orderlist=$orderlist+1;
+        }
+        return $orderlist; 
+    }catch(PDOException $e){
+     echo $e->getMessage();
+    }
+}
+
+
 
 function showorderproduct(){
     try{
@@ -34,7 +54,7 @@ function delete($i){
 try{
 
 	$this->PdoDbConnection();
-	$sql="delete  FROM tbl_product where pid=?";
+	$sql="delete  from tbl_product where pid=?";
      $query=$this->handler->prepare($sql);
     	$query->execute(array($i));
     	return 1;
@@ -71,7 +91,7 @@ try{
     	while($row=$query->fetch()){
     		if($row['email']==$email && $row['password']==$password){
     			$session=$row['email'].date('Y-m-d H:i:s');
-    			$_SESSION['session']=$session;
+    		$_SESSION['session']=$session;
     			return 1;
     		}
     	}
