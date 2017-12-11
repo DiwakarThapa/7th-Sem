@@ -1,266 +1,206 @@
-<?php 
+<?php
+//include('config.php');
 session_start();
-
-if(isset($_POST['add_to_cart'])){
-    $GLOBALS['id']=$_GET['id'];
-	if (isset($_SESSION['shopcart'])) {
-		$item_array_id=array_column($_SESSION['shopcart'],"iditem");
-		if(!in_array($_GET['id'],$item_array_id)){
-			$count=count($_SESSION['shopcart']);
-			
-			$itemlist=array('iditem'=>$_GET['id'],'itemname'=>$_POST['hidden_name'],'itemprice'=>$_POST['hidden_price'],'itemquantity'=>$_POST['quantity']);
-	
-			$_SESSION['shopcart'][$count]=$itemlist;
-						
-	
-
-		}else{
-			echo "<script>alert('inserted early')</script>";
-		}
-
-	} else {
-		$itemlist=array('iditem'=>$_GET['id'],'itemname'=>$_POST['hidden_name'],'itemprice'=>$_POST['hidden_price'],'itemquantity'=>$_POST['quantity']);
-		$_SESSION['shopcart'][0]=$itemlist;
-		}
-		
-}
-/*if(isset($_GET['action'])){
-	if($_GET['action']=="delete"){
-		foreach ($_SESSION['shopcart'] as $key => $value) {
-			if($value["iditem"]==$GLOBALS['id']){
-				unset($_SESSION["shopcart"][$key]);
-				echo "<script>window.location='http://localhost/7th-sem/haatbazar/index.php'</script>";
-
-			}
-		}
-	}
-}*/
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-
+<!doctype html>
+<html>
 <head>
-    <title>HaatBazar</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    
-    <!--Favicon-->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-    
-    <!-- css files -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/owl.theme.default.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/animate.css" />
-    <link rel="stylesheet" type="text/css" href="css/swiper.css" />
-    
-    
-    <link id="pagestyle" rel="stylesheet" type="text/css" href="css/default.css" />
-    
-    <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&amp;subset=latin-ext" rel="stylesheet">
-    
+<meta charset="utf-8">
+<title>Cart</title>
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed|Rubik" rel="stylesheet">
+<style>
+#undr{width:100%; height:580px; position:absolute; top:75px; left:0px;}
+.bdimg{width:100%; height:100%}
+.big-outer{ width:80%; height:100%; background:rgba(255,255,255,0.7); margin:auto}
+.big-outer p{ font-size:60px; text-align:center; margin:0px;}
+.upper-details{background:#EFEFEF;}
+.upper-details td{text-align:center;}
+td{text-align: center;}
+#emptycart{font-size:20px;margin-bottom:15px;color:#111; float:right}
+#emptycart:hover{ color:#fff}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
-    <body>
-        
-        <!-- start topBar -->
-        <div class="topBar inverse">
-            <div class="container">
-                <ul class="list-inline pull-left hidden-sm hidden-xs">
-                    <li><span class="text-primary">Have a question?</span> Call +123 4567 8910</li>
-                </ul>
-                
-                <ul class="topBarNav pull-right">
-                    
-                
-                 <?php require_once("cart/cartsession.php");?>
-                </ul>
-            </div><!-- end container -->
+
+<body>
+    <header>
+      <div id="headdown">
+    <div class="logo"><a href="index.php">Logo</a></div>
+        <div class="srbox">
+              <div class="bk">
+                <input type="text" name="qu" id="qu" class="textbox" placeholder="What are you looking for ?" tabindex="1">
+                <button type="submit" class="query-submit" tabindex="2"><i class="fa fa-search" style="color:#727272; font-size:20px"></i></button>
+              </div>
         </div>
-        <!-- end topBar -->
-        
-        <div class="middleBar">
-            <div class="container">
-                <div class="row display-table">
-                    <div class="col-sm-3 vertical-align text-left hidden-xs">
-                        <a href="index.php">
-                            <img width="160" src="img/logo-big.png" alt="" />
-                        </a>
-                    </div><!-- end col -->
-                    <div class="col-sm-7 vertical-align text-center">
-                        <form>
-                            <div class="row grid-space-1">
-                                <div class="col-sm-6">
-                                    <input type="text" name="keyword" class="form-control input-lg" placeholder="Search">
-                                </div><!-- end col -->
-                                <div class="col-sm-3">
-                                    <select class="form-control input-lg" name="category">
-                                        <option value="all">All Categories</option>
-                                        
-                                        <option value="Clothes">Clothes</option>
-                                        <option value="Bags">Bags</option>
-                                        <option value="Shoes">Shoes</option>
-                                        <option value="Technology">Technology</option>
-                                        
-                                    </select>
-                                </div><!-- end col -->
-                                <div class="col-sm-3">
-                                    <input type="submit"  class="btn btn-default btn-block btn-lg" value="Search">
-                                </div><!-- end col -->
-                            </div><!-- end row -->
-                        </form>
-                    </div><!-- end col -->
-                    <div class="col-sm-2 vertical-align header-items hidden-xs">
-                        
-                        
-                    </div><!-- end col -->
-                </div><!-- end  row -->
-            </div><!-- end container -->
-        </div><!-- end middleBar -->
-        
-        <!-- start navbar -->
-        <div class="navbar yamm navbar-default">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" data-toggle="collapse" data-target="#navbar-collapse-3" class="navbar-toggle">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="javascript:void(0);" class="navbar-brand visible-xs">
-                        <img src="img/logo.png" alt="logo">
-                    </a>
-                </div>
-                <div id="navbar-collapse-3" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <!-- Home -->
-                        <li ><a href="index.php"  >Home</a>
-                            
-                        </li><!-- end li dropdown -->    
-                        <!-- Features -->
-                        
-                       
-                        <li><a href="elements.html">About</a></li>
-                        
-                        
-                    </ul><!-- end navbar-nav -->
-                   
-                </div><!-- end navbar collapse -->
-            </div><!-- end container -->
-        </div><!-- end navbar -->
-        
-        
-        
-        
- 
-        <div class="col-sm-12 text-center">
-        <div class="table-responsive cart_info">
-                <table class="table table-condensed">
-                    <thead>
-                        <tr class="cart_menu">
-           <td class="image"><strong>ITEM</strong></td>
-           <td class="description"><strong>DETAILS</strong></td>
-            <td class="description"><strong>Quantity</strong></td>
-           <td class="total"><strong>PRICE</strong></td>
-           <td class="total"><strong>TOTAL</strong></td>
-          <td class="total"><strong>Cart Remove</strong></td>
+    
+    <div class="acount">
+        <div class="aclogo"><i class="fa fa-user" style="color:#fff; font-size:15px; margin-top:2px"></i></div>
+        <div class="actext">My Account</div>
+    </div>
+    
+        <a href="cart.php"><div class="cart">
+            <i class="fa fa-shopping-cart"></i>
+            <p class="cart-e">Cart</p>
+            <p class="cart-f">
+                <?php
+                    if(isset($_SESSION["cartshop"])){
+                        $s=count($_SESSION["cartshop"]);
+                    }
+                    else{
+                        $s=0;
+                        }
+                    echo $s;
+                ?>
+            </p>
+        </div></a>
+    
+</div>
+    </header>
+    
+<div id="undr">
+        <img class="bdimg" src="bg.jpg">
+    </div>
+<?php
+if (isset($_POST['id'])) {
+
+    $pid = $_POST['id'];
+
+    $wasFound = false;
+    $i = 0;
+    if (!isset($_SESSION["cartshop"]) || count($_SESSION["cartshop"]) < 1) { 
+        $_SESSION["cartshop"] = array(0 => array("item_id" => $pid, "quantity" => 1));
+    } else {
+        foreach ($_SESSION["cartshop"] as $each_item) { 
+              $i++;
+              while (list($key, $value) = each($each_item)) {
+                  if ($key == "item_id" && $value == $pid) {
+                      array_splice($_SESSION["cartshop"], $i-1, 1, array(array("item_id" => $pid, "quantity" => $each_item['quantity'] + 1)));
+                      $wasFound = true;
+                  }
+              }
+           }
+           if ($wasFound == false) {
+               array_push($_SESSION["cartshop"], array("item_id" => $pid, "quantity" => 1));
+           }
+    }
+    header("location: cart.php"); 
+    exit();
+}
+?>
+<?php
+if (isset($_GET['cmd']) && $_GET['cmd'] == "emptycart") {
+    unset($_SESSION["cartshop"]);
+}
+?>
+<?php
+if (isset($_POST['item_to_adjust']) && $_POST['item_to_adjust'] != "") {
+    $item_to_adjust = $_POST['item_to_adjust'];
+    $quantity = $_POST['quantity'];
+    $quantity = preg_replace('#[^0-9]#i', '', $quantity);
+    if ($quantity >= 11) { $quantity = 10; }
+    if ($quantity < 1) { $quantity = 1; }
+    if ($quantity == "") { $quantity = 1; }
+    $i = 0;
+    foreach ($_SESSION["cartshop"] as $each_item) { 
+              $i++;
+              while (list($key, $value) = each($each_item)) {
+                  if ($key == "item_id" && $value == $item_to_adjust) {
+                      array_splice($_SESSION["cartshop"], $i-1, 1, array(array("item_id" => $item_to_adjust, "quantity" => $quantity)));
+                  }
+              }
+    }
+}
+?>
+<?php
+if (isset($_POST['index_to_remove']) && $_POST['index_to_remove'] != "") {
+    $key_to_remove = $_POST['index_to_remove'];
+    if (count($_SESSION["cartshop"]) <= 1) {
+        unset($_SESSION["cartshop"]);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    } else {
+        unset($_SESSION["cartshop"]["$key_to_remove"]);
+        sort($_SESSION["cartshop"]);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+}
+?>
+    <div id="lowrbdy">
+      <div class="big-outer">
+        <p style="text-decoration:underline">Cart</p>
+<table width="100%" border="0" style="border-collapse:collapse">
+<?php
+if(isset($_SESSION['cartshop'])==!NULL){
+?>
+  <tbody>
+    <tr class="upper-details">
+      <td height="36" colspan="2" style="border-right: 1px solid #000;">Item</td>
+      <td width="16%" style="border-right: 1px solid #000;">Quantity</td>
+      <td width="16%" style="border-right: 1px solid #000;">Unit Price</td>
+      <td width="21%">Sub Total</td>
+    </tr>
+<?php
+}
+?>
+<?php 
+$cartTotal = "";
+if (!isset($_SESSION["cartshop"]) || count($_SESSION["cartshop"]) < 1) {
+    echo '<div class="empty-cart"><h2 class="crta">Your Shopping Cart Is Empty</h2>';
+    echo '<br><a href="index.php"><h2 class="alink">Continue Shopping</h2></a></div>';
+} else {
+$i = 0; 
+    foreach ($_SESSION["cartshop"] as $each_item) { 
+        $item_id = $each_item['item_id'];
+        $con=mysqli_connect("localhost","root","","haatbazar");
+        $sql = mysqli_query($con,"SELECT * FROM tbl_product WHERE pid='$item_id' LIMIT 1");
+
+        while ($row = mysqli_fetch_array($sql)) {
+            $productname = $row["productname"];
+            $producttotalprice = $row["price"];
+            $productcode = $row["pid"];
+            $pic=$row['filename'];
             
-           <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>    
-                    	<?php 
-                    	if(!empty($_SESSION['shopcart'])){
-                    		$total=0;
-                    	
-                    		foreach ($_SESSION['shopcart'] as $key => $value) {
-                    	                    	
-                    	?>
-                    <tr>
-                    	<td><?php echo $value['iditem'];?></td>
-                    	<td><?php echo $value['itemname'];?></td>
-                    	<td><?php echo $value['itemquantity'];?></td>
-                    	<td><?php echo $value['itemprice'];?></td>
-                    	<td>Rs.<?php echo $value['itemprice']*$value['itemquantity'];?></td>
-                    	<td><?php $total=$total+$value['itemprice']*$value['itemquantity'];?></td>
-                    	<td><a href="cart.php?action=delete&id=<?php echo $value['iditem'];?>"><button type="button" class="close" aria-label="Close">
-  							<span aria-hidden="true">&times;</span>
-							</button></a></td>
-                    </tr>
-
-                    <?php }
-                    
-                    echo "<tr>
-                    	<td colspan='6'>"."Total Price"."</td>"."<td>Rs.".$total."</td>
-                    	
-                    </tr>";
-                                    	}?>
-                    </tbody>
-                </table>
-            </div>
+            $pr=$row['price'];
+        }
+        $producttotalpricetotal = $producttotalprice * $each_item['quantity'];
+        $cartTotal = (int)$producttotalpricetotal + (int)$cartTotal;
+echo'<tr>
+      <td width="7%" rowspan="3" style="border-bottom: 2px solid #000; height:100px"><img src="imeg/'.$pic.'"/></td>
+      <td width="29%" height="21" style="border-right: 1px solid #000;">&nbsp;</td>
+      <td rowspan="2" style="border-right: 1px solid #000;">
+          <form action="cart.php" method="post">
+            <input name="quantity" id="quantity" type="text" value="' . $each_item['quantity'] . '" size="1" maxlength="2" class="qnttxt"/></br>
+            <input id="adjustBtn" name="adjustBtn' . $item_id . '" type="submit" value="Update" class="qntbtn"/>
+            <input name="item_to_adjust" type="hidden" value="' . $item_id . '" />
+          </form>
+      </td>
+      <td style="border-right: 1px solid #000;">&nbsp;</td>
+      <td>&nbsp;</td>
+      </tr>
+    <tr style="border-bottom: 2px solid #000;">
+      <td style="border-right: 1px solid #000;">'.$productname.'</td>
+      <td style="border-right: 1px solid #000;">Rs. '.number_format($producttotalprice).'</td>
+      <td><p style="float:left;margin:0px 0px 0px 20px;font-size:18px;text-decoration:none">Rs. '.number_format($producttotalprice*$each_item['quantity']).'</p>
+        <form action="cart.php" method="post">
+            <input name="deleteBtn' . $item_id . '" type="submit" value="X" class="removebtn"/>
+            <input name="index_to_remove" type="hidden" value="' . $i . '" />
+        </form>
+      </td>
+    </tr>
+    <tr>';
+    $i++;
+    }
+echo'<div style="width:400px; height:40px; background:rgba(100,190,255,1.00); margin:auto; margin-bottom:6px;margin-top:10px">
+<p style="font-size:20px;text-align:center; color:#fff; line-height:2em">Cart Total: <strong>Rs. '.number_format($cartTotal).' /-</strong></p></div>
+<a href="clear-session.php"><div style="width:55%; height:22px;"><p id="emptycart">( Empty Cart )</p></div></a>
+';
+}
+?>
+  </tbody>
+</table>
         </div>
-            <br><br><br><br><br><br><br><br>
-    <section id="do_action">
-                <div class="container" align="center">
-                <a class="btn btn-default check_out " style="font-size:20px; padding:10px" href="index.php">Continue Shopping</a>   
-            <a class="btn btn-default check_out " style="font-size:20px; padding:10px"  href="form.php">Continue to Payment</a>
-          <!---  <a class="btn btn-default check_out " style="font-size:20px; padding:10px"  href="cart.php?action=delete">Cancel Shopping</a> -->          
-        </div>
-    </section><!--/#do_action-->
-        <br><br><br>
-        <!-- start footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    
-                 
-                    <div class="col-sm-3">
-                        <h5 class="title">Information</h5>
-                        <ul class="list alt-list">
-                            <li><a href="about-us-v1.html"><i class="fa fa-angle-right"></i>About Us</a></li>
-                            <li><a href="faq.html"><i class="fa fa-angle-right"></i>FAQ</a></li>
-                            <li><a href="privacy-policy.html"><i class="fa fa-angle-right"></i>Privacy Policy</a></li>
-                            <li><a href="contact-v1.html"><i class="fa fa-angle-right"></i>Contact Us</a></li>
-                        </ul>
-                    </div><!-- end col -->
-                   
-                </div><!-- end row -->
-                
-                <hr class="spacer-30">
-                
-                <div class="row text-center">
-                    <div class="col-sm-12">
-                        <p class="text-sm">&COPY; 2017. Made  by <a href="javascript:void(0);">Cloudouse.</a></p>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </footer>
-        <!-- end footer -->
-        
-        
-        <!-- JavaScript Files -->
-        <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-        <script type="text/javascript" src="js/jquery.downCount.js"></script>
-        <script type="text/javascript" src="js/nouislider.min.js"></script>
-        <script type="text/javascript" src="js/jquery.sticky.js"></script>
-        <script type="text/javascript" src="js/pace.min.js"></script>
-        <script type="text/javascript" src="js/star-rating.min.js"></script>
-        <script type="text/javascript" src="js/wow.min.js"></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-        <script type="text/javascript" src="js/gmaps.js"></script>
-        <script type="text/javascript" src="js/swiper.min.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-        
-    </body>
-
-
+    </div>
+</body>
 </html>

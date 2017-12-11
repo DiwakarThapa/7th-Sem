@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('Class/class.php');
+require_once('Class/class.php'); 
 include('include/header.php');
 
 include('include/navbar.php');

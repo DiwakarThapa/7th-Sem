@@ -70,7 +70,8 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="order.php"><i class="fa fa-table fa-fw"></i> Orders <span style="color: red;">(<?php    $db=new PdoConnection();
+                                <a href="order.php"><i class="fa fa-table fa-fw"></i> Orders <span style="color: red;">(<?php    
+                                    $db=new PdoConnection();
                                     echo $db->getordernumber();?>)</span></a>
                             </li>
                           

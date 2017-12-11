@@ -12,7 +12,26 @@ function PdoDbConnection(){
 			die("Something go wrong with connection!!!");
 //$e->getMessage();
 }}
+function search($searchq){
+ try{
+    $search=0;
+    $this->PdoDbConnection();
+    $sql="select * from tbl_product where productname like '%$searchq%'";
+    $query=$this->handler->prepare($sql);
+    $query->execute();
+    $count=$query->rowCount($query);
+    if($count==0){
+        $search="NO data to search !!!!!!!!";
+    }else{
+       $row=$query->fetchAll();
+    $search=$row;
+    }
+return $search;
+ }catch(PDOException $e){
+ echo $e->getMessage();
+ }
 
+}
 
 function getordernumber(){
     try{

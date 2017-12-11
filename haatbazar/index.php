@@ -1,5 +1,8 @@
 <?php
+session_start();
 require_once('wp-admin/Class/class.php'); 
+ 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,12 +44,21 @@ require_once('wp-admin/Class/class.php');
                 <ul class="list-inline pull-left hidden-sm hidden-xs">
                     <li><span class="text-primary">Have a question?</span> Call +123 4567 8910</li>
                 </ul>
-                
-                <ul class="topBarNav pull-right">
-                    
-                
-                   <?php session_start();require_once("cart/cartsession.php");?>
-                </ul>
+               <a href="cart.php"><div class="cart">
+            <i class="fa fa-shopping-cart"></i>
+            <p class="cart-e">Cart</p>
+            <p class="cart-f">
+                <?php
+                    if(isset($_SESSION["cartshop"])){
+                        $s=count($_SESSION["cartshop"]);
+                    }
+                    else{
+                        $s=0;
+                        }
+                    echo $s;
+                ?>
+            </p>
+        </div></a>
             </div><!-- end container -->
         </div>
         <!-- end topBar -->
@@ -60,12 +72,12 @@ require_once('wp-admin/Class/class.php');
                         </a>
                     </div><!-- end col -->
                     <div class="col-sm-7 vertical-align text-center">
-                        <form>
+                        <form action="search.php" method="post">
                             <div class="row grid-space-1">
                                 <div class="col-sm-6">
-                                    <input type="text" name="keyword" class="form-control input-lg" placeholder="Search">
+                                    <input type="text" name="search" class="form-control input-lg" placeholder="Search">
                                 </div><!-- end col -->
-                                <div class="col-sm-3">
+                                <!--<div class="col-sm-3">
                                     <select class="form-control input-lg" name="category">
                                         <option value="all">All Categories</option>
                                         
@@ -75,7 +87,7 @@ require_once('wp-admin/Class/class.php');
                                         <option value="Technology">Technology</option>
                                         
                                     </select>
-                                </div><!-- end col -->
+                                </div>--><!-- end col -->
                                 <div class="col-sm-3">
                                     <input type="submit"  class="btn btn-default btn-block btn-lg" value="Search">
                                 </div><!-- end col -->
@@ -305,10 +317,10 @@ require_once('wp-admin/Class/class.php');
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="featured">
                                 <?php
-                                   $showobj=new PdoConnection();
+                                  $showobj=new PdoConnection();
                                $row=$showobj->showproduct();
                                 ?>
-                                <div class="row column-4">
+                                 <div class="row column-4">
                                <?php
                                 foreach($row as $v){
                                 ?>
@@ -328,15 +340,16 @@ require_once('wp-admin/Class/class.php');
                                             </div>
                                             <div class="caption">
                                                 <h6 class="regular"><a href="#"><?php echo $v['productname'];?></a></h6>
-                                               <form method="post" action="cart.php?action=add&id=<?php echo $v['pid'];  ?>">  
+                                               <form method="post" action="cart.php">  
                       
                                                 <div class="price">
-                                                    <small class="amount off">Rs.<?php echo  $v['price'];?></small>
-                                                    <span class="amount text-primary">Rs.<?php echo  $v['cprice'];?></span>
+                                                    <small class="amount off"><?php echo $v['price'];?></small>
+                                                    <span class="amount text-primary"><?php echo $v['cprice'];?></span>
+                                                     <input type="hidden" name="id" value="<?php  echo $v['pid'];?>" />
                                                     <input type="hidden" name="hidden_name" value="<?php echo $v['productname'];?>" />  
                                <input type="hidden" name="hidden_price" value="<?php echo $v["price"];?>" />  
-                           </div>  <h6 class="regular">Quantity</h6>
-                                                 <input type="text" name="quantity" class="form-control" value="1" />   
+                           </div>  
+                                                 
                                                  <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" /> 
                                             </form>
                                             </div><!-- end caption -->
@@ -345,8 +358,6 @@ require_once('wp-admin/Class/class.php');
                                   <?php }?>
                           
                                 </div><!-- end tab content -->
-                            <?php //}?>
-                            </div><!-- end col -->
                     </div><!-- end col -->
                 </div><!-- end row -->
             </div><!-- end container -->
@@ -371,7 +382,7 @@ require_once('wp-admin/Class/class.php');
                             <div role="tabpanel" class="tab-pane fade in active" id="featured">
                                 <?php
                                    $showobj=new PdoConnection();
-                               $row=$showobj->showproduct();
+                                   $row=$showobj->showproduct();
                                 ?>
                                 <div class="row column-4">
                                <?php
@@ -393,15 +404,16 @@ require_once('wp-admin/Class/class.php');
                                             </div>
                                             <div class="caption">
                                                 <h6 class="regular"><a href="#"><?php echo $v['productname'];?></a></h6>
-                                               <form method="post" action="cart.php?action=add&id=<?php echo $v['pid'];  ?>">  
+                                               <form method="post" action="cart.php">  
                       
                                                 <div class="price">
                                                     <small class="amount off"><?php echo $v['price'];?></small>
                                                     <span class="amount text-primary"><?php echo $v['cprice'];?></span>
+                                                      <input type="hidden" name="id" value="<?php  echo $v['pid'];?>" />
                                                     <input type="hidden" name="hidden_name" value="<?php echo $v['productname'];?>" />  
                                <input type="hidden" name="hidden_price" value="<?php echo $v["price"];?>" />  
-                           </div>  <h6 class="regular">Quantity</h6>
-                                                 <input type="text" name="quantity" class="form-control" value="1" />   
+                           </div>  
+                                                
                                                  <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" /> 
                                             </form>
                                             </div><!-- end caption -->
